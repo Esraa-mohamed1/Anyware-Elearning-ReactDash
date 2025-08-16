@@ -3,7 +3,6 @@ import {
   Container,
   Typography,
   Box,
-  Grid,
   Chip,
   styled,
 } from '@mui/material';
@@ -99,9 +98,17 @@ const QuizzesPage: React.FC = () => {
           </Box>
         </Box>
 
-        <Grid container spacing={3}>
+        <Box sx={{ 
+          display: 'grid', 
+          gridTemplateColumns: { 
+            xs: '1fr', 
+            sm: 'repeat(2, 1fr)', 
+            lg: 'repeat(3, 1fr)' 
+          }, 
+          gap: 3 
+        }}>
           {quizzes.map((quiz) => (
-            <Grid item xs={12} sm={6} lg={4} key={quiz._id}>
+            <Box key={quiz._id}>
               <ElegantCard
                 title={quiz.title}
                 subtitle={quiz.course}
@@ -113,9 +120,9 @@ const QuizzesPage: React.FC = () => {
                 content={quiz.description}
                 onViewDetails={() => handleViewDetails(quiz._id)}
               />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
 
         {quizzes.length === 0 && (
           <Box sx={{ 

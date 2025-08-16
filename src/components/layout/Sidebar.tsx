@@ -84,7 +84,6 @@ const Sidebar: React.FC = () => {
         {menuItems.map((item) => (
           <StyledListItem
             key={item.text}
-            button
             onClick={() => handleNavigation(item.path)}
             className={activePath === item.path ? 'active' : ''}
           >

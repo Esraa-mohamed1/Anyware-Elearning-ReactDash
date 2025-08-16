@@ -3,7 +3,6 @@ import {
   Container,
   Typography,
   Box,
-  Grid,
   Chip,
   styled,
 } from '@mui/material';
@@ -92,9 +91,17 @@ const AnnouncementsPage: React.FC = () => {
           </Box>
         </Box>
 
-        <Grid container spacing={3}>
+        <Box sx={{ 
+          display: 'grid', 
+          gridTemplateColumns: { 
+            xs: '1fr', 
+            sm: 'repeat(2, 1fr)', 
+            lg: 'repeat(3, 1fr)' 
+          }, 
+          gap: 3 
+        }}>
           {announcements.map((announcement) => (
-            <Grid item xs={12} sm={6} lg={4} key={announcement._id}>
+            <Box key={announcement._id}>
               <ElegantCard
                 title={announcement.title}
                 subtitle={announcement.sender}
@@ -105,9 +112,9 @@ const AnnouncementsPage: React.FC = () => {
                 content={announcement.content}
                 onViewDetails={() => handleViewDetails(announcement._id)}
               />
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
 
         {announcements.length === 0 && (
           <Box sx={{ 
