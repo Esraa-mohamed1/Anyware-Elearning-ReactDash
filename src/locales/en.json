@@ -1,0 +1,45 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "search": "Search",
+    "all": "All",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "auth": {
+    "login": "Login to Dashboard",
+    "logout": "Logout",
+    "noCredentials": "No username or password required for demo"
+  },
+  "dashboard": {
+    "title": "Student Dashboard",
+    "welcomeMessage": "Welcome to your student dashboard. Access your courses, quizzes, and announcements all in one place."
+  },
+  "exams": {
+    "title": "EXAMS TIME",
+    "description": "Here we are, Are you ready to fight? Don't worry, we prepared some tips to be ready for your exams.",
+    "quote": "\"Nothing happens until something moves\" - Albert Einstein",
+    "viewTips": "View exams tips"
+  },
+  "announcements": {
+    "title": "Announcements",
+    "viewAll": "All"
+  },
+  "quizzes": {
+    "title": "What's due",
+    "subtitle": "Sometimes 'LATER' becomes 'NEVER' so follow",
+    "viewAll": "All",
+    "startQuiz": "Start Quiz",
+    "solveAssignment": "Solve Assignment",
+    "due": "Due"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "schedule": "Schedule",
+    "courses": "Courses",
+    "gradebook": "Gradebook",
+    "performance": "Performance",
+    "announcement": "Announcement"
+  }
+}
