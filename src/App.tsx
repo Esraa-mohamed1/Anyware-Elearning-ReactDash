@@ -65,6 +65,7 @@ function App() {
                 </RequireAuth>
               }
             />
+            {/* Redirect all undefined routes to the home page */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Router>
