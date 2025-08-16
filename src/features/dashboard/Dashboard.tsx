@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Grid2 as Grid, Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { fetchAnnouncements } from '../announcements/announcementsSlice';
@@ -26,27 +26,27 @@ const Dashboard: React.FC = () => {
   return (
     <Layout activePath="/dashboard">
       <Container maxWidth="xl">
-        <Grid container spacing={3}>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, gap: 3 }}>
           {/* Left Column */}
-          <Grid item xs={12} lg={8}>
-            <Grid container spacing={3}>
+          <Box sx={{ flex: { lg: 2 } }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
               {/* Exam Card */}
-              <Grid item xs={12}>
+              <Box>
                 <ExamCard />
-              </Grid>
+              </Box>
               
               {/* Announcements Card */}
-              <Grid item xs={12}>
+              <Box>
                 <AnnouncementsCard announcements={announcements} />
-              </Grid>
-            </Grid>
-          </Grid>
+              </Box>
+            </Box>
+          </Box>
           
           {/* Right Column */}
-          <Grid item xs={12} lg={4}>
+          <Box sx={{ flex: { lg: 1 } }}>
             <QuizzesCard quizzes={quizzes} />
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Container>
     </Layout>
   );

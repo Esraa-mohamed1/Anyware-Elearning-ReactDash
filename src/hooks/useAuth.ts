@@ -28,6 +28,7 @@ export const useAuth = () => {
     const token = 'dummy-token-' + Date.now(); // Simple token for demo
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(userData));
+    console.log('Setting user in Redux:', userData);
     dispatch(setUser(userData));
   };
 

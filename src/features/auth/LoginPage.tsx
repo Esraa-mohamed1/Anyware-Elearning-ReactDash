@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container,
   Box,
@@ -8,6 +8,7 @@ import {
   styled,
 } from '@mui/material';
 import { School as SchoolIcon } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 const StyledPaper = styled(Paper)({
@@ -22,7 +23,14 @@ const StyledPaper = styled(Paper)({
 });
 
 const LoginPage: React.FC = () => {
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/dashboard');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleLogin = () => {
     const mockUser = {
@@ -30,7 +38,10 @@ const LoginPage: React.FC = () => {
       name: 'Talia',
       email: 'talia@example.com',
     };
+    console.log('Logging in user:', mockUser);
     login(mockUser);
+    console.log('Navigating to dashboard...');
+    navigate('/dashboard');
   };
 
   return (
