@@ -7,6 +7,8 @@ import { store } from './store';
 import RequireAuth from './components/common/RequireAuth';
 import LoginPage from './features/auth/LoginPage';
 import Dashboard from './features/dashboard/Dashboard';
+import AnnouncementsPage from './features/announcements/AnnouncementsPage';
+import QuizzesPage from './features/quizzes/QuizzesPage';
 
 const theme = createTheme({
   palette: {
@@ -44,6 +46,22 @@ function App() {
               element={
                 <RequireAuth>
                   <Dashboard />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/announcements"
+              element={
+                <RequireAuth>
+                  <AnnouncementsPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/quizzes"
+              element={
+                <RequireAuth>
+                  <QuizzesPage />
                 </RequireAuth>
               }
             />

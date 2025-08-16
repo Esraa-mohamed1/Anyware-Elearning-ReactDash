@@ -17,6 +17,7 @@ import {
   TrendingUp as TrendingUpIcon,
   Announcement as AnnouncementIcon,
 } from '@mui/icons-material';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -60,14 +61,18 @@ const menuItems = [
   { text: 'Courses', icon: <BookIcon />, path: '/courses' },
   { text: 'Gradebook', icon: <SchoolIcon />, path: '/gradebook' },
   { text: 'Performance', icon: <TrendingUpIcon />, path: '/performance' },
-  { text: 'Announcement', icon: <AnnouncementIcon />, path: '/announcements' },
+  { text: 'Announcements', icon: <AnnouncementIcon />, path: '/announcements' },
 ];
 
-interface SidebarProps {
-  activePath: string;
-}
+const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const activePath = location.pathname;
 
-const Sidebar: React.FC<SidebarProps> = ({ activePath }) => {
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
   return (
     <StyledDrawer variant="permanent">
       <Box sx={{ p: 2 }}>
@@ -79,6 +84,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activePath }) => {
         {menuItems.map((item) => (
           <StyledListItem
             key={item.text}
+            button
+            onClick={() => handleNavigation(item.path)}
             className={activePath === item.path ? 'active' : ''}
           >
             <StyledListItemIcon>{item.icon}</StyledListItemIcon>

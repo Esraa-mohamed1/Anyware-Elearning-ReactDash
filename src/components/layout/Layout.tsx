@@ -7,14 +7,13 @@ const drawerWidth = 240;
 
 interface LayoutProps {
   children: React.ReactNode;
-  activePath: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, activePath }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Sidebar activePath={activePath} />
+      <Sidebar />
       <Header />
       <Box
         component="main"

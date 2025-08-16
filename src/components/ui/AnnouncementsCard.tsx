@@ -9,9 +9,10 @@ import {
   ListItemText,
   Avatar,
   Box,
-  Link,
+  Button,
   styled,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { Announcement } from '../../types';
 
 const StyledCard = styled(Card)({
@@ -40,6 +41,12 @@ interface AnnouncementsCardProps {
 }
 
 const AnnouncementsCard: React.FC<AnnouncementsCardProps> = ({ announcements }) => {
+  const navigate = useNavigate();
+
+  const handleViewAll = () => {
+    navigate('/announcements');
+  };
+
   return (
     <StyledCard>
       <CardContent>
@@ -54,19 +61,22 @@ const AnnouncementsCard: React.FC<AnnouncementsCardProps> = ({ announcements }) 
           >
             Announcements
           </Typography>
-          <Link
-            href="#"
+          <Button
+            onClick={handleViewAll}
             sx={{
               color: '#3b82f6',
-              textDecoration: 'none',
+              textTransform: 'none',
               fontWeight: '500',
+              p: 0,
+              minWidth: 'auto',
               '&:hover': {
+                bgcolor: 'transparent',
                 textDecoration: 'underline',
               },
             }}
           >
-            All
-          </Link>
+            View All
+          </Button>
         </Box>
 
         <List sx={{ p: 0 }}>
