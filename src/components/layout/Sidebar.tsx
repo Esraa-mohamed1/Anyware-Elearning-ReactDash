@@ -8,6 +8,7 @@ import {
   Typography,
   Box,
   styled,
+  Button,
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
@@ -17,6 +18,8 @@ import {
   TrendingUp as TrendingUpIcon,
   Announcement as AnnouncementIcon,
 } from '@mui/icons-material';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const drawerWidth = 240;
 
@@ -60,32 +63,61 @@ const menuItems = [
   { text: 'Courses', icon: <BookIcon />, path: '/courses' },
   { text: 'Gradebook', icon: <SchoolIcon />, path: '/gradebook' },
   { text: 'Performance', icon: <TrendingUpIcon />, path: '/performance' },
-  { text: 'Announcement', icon: <AnnouncementIcon />, path: '/announcements' },
+  { text: 'Announcements', icon: <AnnouncementIcon />, path: '/announcements' },
 ];
 
-interface SidebarProps {
-  activePath: string;
-}
+const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const activePath = location.pathname;
+  const { i18n } = useTranslation();
 
-const Sidebar: React.FC<SidebarProps> = ({ activePath }) => {
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng); // Change the language dynamically
+  };
+
   return (
     <StyledDrawer variant="permanent">
-      <Box sx={{ p: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>
-          Coligo
-        </Typography>
-      </Box>
-      <List>
-        {menuItems.map((item) => (
-          <StyledListItem
-            key={item.text}
-            className={activePath === item.path ? 'active' : ''}
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Box sx={{ p: 2 }}>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>
+            Coligo
+          </Typography>
+        </Box>
+        <List>
+          {menuItems.map((item) => (
+            <StyledListItem
+              key={item.text}
+              onClick={() => handleNavigation(item.path)}
+              className={activePath === item.path ? 'active' : ''}
+            >
+              <StyledListItemIcon>{item.icon}</StyledListItemIcon>
+              <ListItemText primary={item.text} />
+            </StyledListItem>
+          ))}
+        </List>
+        <Box sx={{ mt: 'auto', p: 2, textAlign: 'center' }}>
+          {/* Language Switcher Buttons */}
+          <Button
+            variant="contained"
+            onClick={() => changeLanguage('en')}
+            sx={{ textTransform: 'none', mb: 1 }}
           >
-            <StyledListItemIcon>{item.icon}</StyledListItemIcon>
-            <ListItemText primary={item.text} />
-          </StyledListItem>
-        ))}
-      </List>
+            English
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => changeLanguage('ar')}
+            sx={{ textTransform: 'none' }}
+          >
+            العربية
+          </Button>
+        </Box>
+      </Box>
     </StyledDrawer>
   );
 };

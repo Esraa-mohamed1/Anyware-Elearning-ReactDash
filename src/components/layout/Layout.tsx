@@ -7,23 +7,20 @@ const drawerWidth = 240;
 
 interface LayoutProps {
   children: React.ReactNode;
-  activePath: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, activePath }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <Sidebar activePath={activePath} />
-      <Header />
+      <Sidebar />
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           bgcolor: '#f9fafb',
           minHeight: '100vh',
-          marginLeft: `${drawerWidth}px`,
-          marginTop: '64px',
+          marginLeft: 0, // Remove margin to align with the drawer
           padding: { xs: 2, md: 4 },
         }}
       >

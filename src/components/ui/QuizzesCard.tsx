@@ -9,13 +9,13 @@ import {
   ListItemText,
   Button,
   Box,
-  Link,
   styled,
 } from '@mui/material';
 import {
   HourglassEmpty as HourglassIcon,
   Assignment as AssignmentIcon,
 } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { Quiz } from '../../types';
 
 const StyledCard = styled(Card)({
@@ -58,6 +58,8 @@ interface QuizzesCardProps {
 }
 
 const QuizzesCard: React.FC<QuizzesCardProps> = ({ quizzes }) => {
+  const navigate = useNavigate();
+
   const formatDueDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -67,6 +69,10 @@ const QuizzesCard: React.FC<QuizzesCardProps> = ({ quizzes }) => {
       hour: '2-digit',
       minute: '2-digit',
     });
+  };
+
+  const handleViewAll = () => {
+    navigate('/quizzes');
   };
 
   return (
@@ -83,19 +89,22 @@ const QuizzesCard: React.FC<QuizzesCardProps> = ({ quizzes }) => {
           >
             What's due
           </Typography>
-          <Link
-            href="#"
+          <Button
+            onClick={handleViewAll}
             sx={{
               color: '#3b82f6',
-              textDecoration: 'none',
+              textTransform: 'none',
               fontWeight: '500',
+              p: 0,
+              minWidth: 'auto',
               '&:hover': {
+                bgcolor: 'transparent',
                 textDecoration: 'underline',
               },
             }}
           >
-            All
-          </Link>
+            View All
+          </Button>
         </Box>
 
         <Typography

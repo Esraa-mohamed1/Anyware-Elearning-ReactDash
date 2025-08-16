@@ -32,6 +32,11 @@ const LoginPage: React.FC = () => {
     }
   }, [isAuthenticated, navigate]);
 
+  // Prevent rendering the login page if the user is authenticated
+  if (isAuthenticated) {
+    return null; // Render nothing while redirecting
+  }
+
   const handleLogin = () => {
     const mockUser = {
       id: '1',

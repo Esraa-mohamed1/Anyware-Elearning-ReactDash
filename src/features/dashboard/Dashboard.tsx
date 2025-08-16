@@ -24,7 +24,7 @@ const Dashboard: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <Layout activePath="/dashboard">
+    <Layout>
       <Container maxWidth="xl" sx={{ py: 0 }}>
         <Box sx={{ 
           display: 'flex', 
