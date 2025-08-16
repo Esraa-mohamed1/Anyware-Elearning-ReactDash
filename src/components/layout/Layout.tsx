@@ -14,15 +14,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <Sidebar />
-      <Header />
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           bgcolor: '#f9fafb',
           minHeight: '100vh',
-          marginLeft: `${drawerWidth}px`,
-          marginTop: '64px',
+          marginLeft: 0, // Remove margin to align with the drawer
           padding: { xs: 2, md: 4 },
         }}
       >
