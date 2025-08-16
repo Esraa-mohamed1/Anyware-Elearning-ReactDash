@@ -24,7 +24,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activePath }) => {
           minHeight: '100vh',
           marginLeft: `${drawerWidth}px`,
           marginTop: '64px',
-          padding: 3,
+          padding: { xs: 2, md: 4 },
         }}
       >
         {children}

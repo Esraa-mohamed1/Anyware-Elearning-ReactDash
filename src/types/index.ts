@@ -8,6 +8,8 @@ export interface Announcement {
   _id: string;
   title: string;
   content: string;
+  sender: string;
+  course: string;
   date: string;
   semester: string;
   createdAt: string;
@@ -18,9 +20,11 @@ export interface Quiz {
   _id: string;
   title: string;
   description?: string;
+  topic: string;
   dueDate: string;
   course: string;
   semester: string;
+  type: 'quiz' | 'assignment';
   createdAt: string;
   updatedAt: string;
 }

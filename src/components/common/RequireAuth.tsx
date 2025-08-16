@@ -9,8 +9,6 @@ interface RequireAuthProps {
 const RequireAuth: React.FC<RequireAuthProps> = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
 
-  console.log('RequireAuth - isAuthenticated:', isAuthenticated, 'loading:', loading);
-
   if (loading) {
     return (
       <div style={{ 
@@ -25,11 +23,9 @@ const RequireAuth: React.FC<RequireAuthProps> = ({ children }) => {
   }
 
   if (!isAuthenticated) {
-    console.log('RequireAuth - Redirecting to login');
     return <Navigate to="/" replace />;
   }
 
-  console.log('RequireAuth - Rendering children');
   return <>{children}</>;
 };
 

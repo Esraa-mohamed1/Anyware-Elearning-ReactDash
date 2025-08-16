@@ -38,9 +38,7 @@ const LoginPage: React.FC = () => {
       name: 'Talia',
       email: 'talia@example.com',
     };
-    console.log('Logging in user:', mockUser);
     login(mockUser);
-    console.log('Navigating to dashboard...');
     navigate('/dashboard');
   };
 

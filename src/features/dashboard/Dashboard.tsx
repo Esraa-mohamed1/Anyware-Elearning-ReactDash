@@ -25,11 +25,20 @@ const Dashboard: React.FC = () => {
 
   return (
     <Layout activePath="/dashboard">
-      <Container maxWidth="xl">
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', lg: 'row' }, gap: 3 }}>
+      <Container maxWidth="xl" sx={{ py: 0 }}>
+        <Box sx={{ 
+          display: 'flex', 
+          flexDirection: { xs: 'column', lg: 'row' }, 
+          gap: { xs: 2, md: 3 },
+          mt: { xs: 1, md: 2 }
+        }}>
           {/* Left Column */}
           <Box sx={{ flex: { lg: 2 } }}>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <Box sx={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              gap: { xs: 2, md: 3 }
+            }}>
               {/* Exam Card */}
               <Box>
                 <ExamCard />

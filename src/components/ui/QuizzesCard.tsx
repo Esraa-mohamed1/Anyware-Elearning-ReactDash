@@ -22,8 +22,13 @@ const StyledCard = styled(Card)({
   height: '100%',
   background: 'white',
   border: '1px solid #e5e7eb',
-  borderRadius: '16px',
-  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+  borderRadius: '20px',
+  boxShadow: '0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05)',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 12px 35px -8px rgba(0, 0, 0, 0.15), 0 6px 15px -3px rgba(0, 0, 0, 0.08)',
+  },
 });
 
 const StyledListItem = styled(ListItem)({
@@ -53,24 +58,16 @@ interface QuizzesCardProps {
 }
 
 const QuizzesCard: React.FC<QuizzesCardProps> = ({ quizzes }) => {
-  const mockQuizzes = [
-    {
-      id: '1',
-      title: 'Unit 2 quiz',
-      course: 'Physics 02',
-      topic: 'Unit2: Motion and forces',
-      dueDate: '20 Dec 2017 - 09:00 PM',
-      type: 'quiz',
-    },
-    {
-      id: '2',
-      title: '12-12 Assignment',
-      course: 'Arabic K12',
-      topic: 'الوحدة الثانية - الأفعال',
-      dueDate: '20 Dec 2017 - 09:00 PM',
-      type: 'assignment',
-    },
-  ];
+  const formatDueDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
 
   return (
     <StyledCard>
@@ -113,8 +110,8 @@ const QuizzesCard: React.FC<QuizzesCardProps> = ({ quizzes }) => {
         </Typography>
 
         <List sx={{ p: 0 }}>
-          {mockQuizzes.map((quiz) => (
-            <StyledListItem key={quiz.id}>
+          {quizzes.slice(0, 3).map((quiz) => (
+            <StyledListItem key={quiz._id}>
               <ListItemIcon sx={{ minWidth: 40 }}>
                 {quiz.type === 'quiz' ? (
                   <HourglassIcon sx={{ color: '#f59e0b' }} />
@@ -164,7 +161,7 @@ const QuizzesCard: React.FC<QuizzesCardProps> = ({ quizzes }) => {
                         fontWeight: '500',
                       }}
                     >
-                      Due {quiz.dueDate}
+                      Due {formatDueDate(quiz.dueDate)}
                     </Typography>
                   </Box>
                 }

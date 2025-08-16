@@ -18,8 +18,13 @@ const StyledCard = styled(Card)({
   height: '100%',
   background: 'white',
   border: '1px solid #e5e7eb',
-  borderRadius: '16px',
-  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+  borderRadius: '20px',
+  boxShadow: '0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05)',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 12px 35px -8px rgba(0, 0, 0, 0.15), 0 6px 15px -3px rgba(0, 0, 0, 0.08)',
+  },
 });
 
 const StyledListItem = styled(ListItem)({
@@ -35,37 +40,6 @@ interface AnnouncementsCardProps {
 }
 
 const AnnouncementsCard: React.FC<AnnouncementsCardProps> = ({ announcements }) => {
-  const mockAnnouncements = [
-    {
-      id: '1',
-      sender: 'Mr. Ahmed Mostafa',
-      course: 'Math 101',
-      message: 'Exams and grades will be published tomorrow 😊',
-      avatar: 'A',
-    },
-    {
-      id: '2',
-      sender: 'Mrs. Salma Ahmed',
-      course: 'Physics 02',
-      message: 'There will be a quiz next week',
-      avatar: 'S',
-    },
-    {
-      id: '3',
-      sender: 'School management',
-      course: 'Management',
-      message: 'Morning call for all students 🌅',
-      avatar: 'S',
-    },
-    {
-      id: '4',
-      sender: 'Events Manager',
-      course: 'Events',
-      message: 'Upcoming trip announcement',
-      avatar: 'E',
-    },
-  ];
-
   return (
     <StyledCard>
       <CardContent>
@@ -96,8 +70,8 @@ const AnnouncementsCard: React.FC<AnnouncementsCardProps> = ({ announcements }) 
         </Box>
 
         <List sx={{ p: 0 }}>
-          {mockAnnouncements.map((announcement) => (
-            <StyledListItem key={announcement.id} alignItems="flex-start">
+          {announcements.slice(0, 4).map((announcement) => (
+            <StyledListItem key={announcement._id} alignItems="flex-start">
               <ListItemAvatar>
                 <Avatar
                   sx={{
@@ -107,7 +81,7 @@ const AnnouncementsCard: React.FC<AnnouncementsCardProps> = ({ announcements }) 
                     fontSize: '0.875rem',
                   }}
                 >
-                  {announcement.avatar}
+                  {announcement.sender.charAt(0)}
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
@@ -142,7 +116,7 @@ const AnnouncementsCard: React.FC<AnnouncementsCardProps> = ({ announcements }) 
                         fontSize: '0.875rem',
                       }}
                     >
-                      {announcement.message}
+                      {announcement.content}
                     </Typography>
                   </Box>
                 }

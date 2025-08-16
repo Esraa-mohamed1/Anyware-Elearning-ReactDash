@@ -32,17 +32,20 @@ const StyledDrawer = styled(Drawer)({
 });
 
 const StyledListItem = styled(ListItem)({
-  margin: '4px 8px',
-  borderRadius: '8px',
+  margin: '6px 12px',
+  borderRadius: '12px',
+  transition: 'all 0.3s ease',
   '&:hover': {
     backgroundColor: 'white',
     color: '#1e3a8a',
+    transform: 'translateX(4px)',
     '& .MuiListItemIcon-root': {
       color: '#1e3a8a',
     },
   },
   '&.active': {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    borderLeft: '4px solid white',
   },
 });
 

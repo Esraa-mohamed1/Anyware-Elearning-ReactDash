@@ -15,8 +15,13 @@ const StyledCard = styled(Card)({
   flexDirection: 'column',
   background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
   border: '1px solid #e5e7eb',
-  borderRadius: '16px',
-  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+  borderRadius: '20px',
+  boxShadow: '0 8px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.05)',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 12px 35px -8px rgba(0, 0, 0, 0.15), 0 6px 15px -3px rgba(0, 0, 0, 0.08)',
+  },
 });
 
 const ExamCard: React.FC = () => {
