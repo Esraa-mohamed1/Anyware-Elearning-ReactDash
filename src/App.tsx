@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { store } from './store';
 import RequireAuth from './components/common/RequireAuth';
-import LoginPage from './features/auth/LoginPage';
+import HomePage from './features/home/HomePage';
 import Dashboard from './features/dashboard/Dashboard';
 import AnnouncementsPage from './features/announcements/AnnouncementsPage';
 import QuizzesPage from './features/quizzes/QuizzesPage';
@@ -40,7 +40,9 @@ function App() {
         <CssBaseline />
         <Router>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            {/* Home page now shows Header + Login/Logout button */}
+            <Route path="/" element={<HomePage />} />
+
             <Route
               path="/dashboard"
               element={
@@ -65,7 +67,8 @@ function App() {
                 </RequireAuth>
               }
             />
-            {/* Redirect all undefined routes to the home page */}
+
+            {/* Redirect any unknown route to home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Router>

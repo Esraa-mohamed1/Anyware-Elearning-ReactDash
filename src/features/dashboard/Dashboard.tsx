@@ -8,6 +8,7 @@ import Layout from '../../components/layout/Layout';
 import ExamCard from '../../components/ui/ExamCard';
 import AnnouncementsCard from '../../components/ui/AnnouncementsCard';
 import QuizzesCard from '../../components/ui/QuizzesCard';
+import Header from '../../components/layout/Header';
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,40 +25,49 @@ const Dashboard: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <Layout>
-      <Container maxWidth="xl" sx={{ py: 0 }}>
-        <Box sx={{ 
-          display: 'flex', 
-          flexDirection: { xs: 'column', lg: 'row' }, 
-          gap: { xs: 2, md: 3 },
-          mt: { xs: 1, md: 2 }
-        }}>
-          {/* Left Column */}
-          <Box sx={{ flex: { lg: 2 } }}>
-            <Box sx={{ 
-              display: 'flex', 
-              flexDirection: 'column', 
-              gap: { xs: 2, md: 3 }
-            }}>
-              {/* Exam Card */}
-              <Box>
-                <ExamCard />
-              </Box>
-              
-              {/* Announcements Card */}
-              <Box>
-                <AnnouncementsCard announcements={announcements} />
+    <>
+      {/* Header ثابت فوق */}
+      <Header />
+
+      {/* محتوى الـ Dashboard */}
+      <Layout>
+        <Container maxWidth="xl" sx={{ py: 0, mt: 8 }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: { xs: 'column', lg: 'row' },
+              gap: { xs: 2, md: 3 },
+            }}
+          >
+            {/* Left Column */}
+            <Box sx={{ flex: { lg: 2 } }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: { xs: 2, md: 3 },
+                }}
+              >
+                {/* Exam Card */}
+                <Box>
+                  <ExamCard />
+                </Box>
+
+                {/* Announcements Card */}
+                <Box>
+                  <AnnouncementsCard announcements={announcements} />
+                </Box>
               </Box>
             </Box>
+
+            {/* Right Column */}
+            <Box sx={{ flex: { lg: 1 } }}>
+              <QuizzesCard quizzes={quizzes} />
+            </Box>
           </Box>
-          
-          {/* Right Column */}
-          <Box sx={{ flex: { lg: 1 } }}>
-            <QuizzesCard quizzes={quizzes} />
-          </Box>
-        </Box>
-      </Container>
-    </Layout>
+        </Container>
+      </Layout>
+    </>
   );
 };
 
