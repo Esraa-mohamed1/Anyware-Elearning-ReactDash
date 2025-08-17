@@ -3,109 +3,119 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  InputBase,
+  Box,
+  IconButton,
   Badge,
   Avatar,
-  Box,
-  styled,
+  Button,
+  InputBase,
 } from '@mui/material';
-import {
-  Search as SearchIcon,
-  Notifications as NotificationsIcon,
-  Mail as MailIcon,
-} from '@mui/icons-material';
+import { Notifications, Mail, Search } from '@mui/icons-material';
+import { styled, alpha } from '@mui/material/styles';
 import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
-const drawerWidth = 240;
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.text.primary,
+  boxShadow: '0px 2px 8px rgba(0,0,0,0.1)',
+  borderBottom: `1px solid ${theme.palette.divider}`,
+}));
 
-const StyledAppBar = styled(AppBar)({
-  width: `calc(100% - ${drawerWidth}px)`,
-  marginLeft: drawerWidth,
-  backgroundColor: 'white',
-  color: '#374151',
-  boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-});
+const StyledToolbar = styled(Toolbar)(() => ({
+  paddingLeft: '290px !important',
+  paddingRight: '16px !important',
+  minHeight: 64,
+}));
 
-const Search = styled('div')(({ theme }) => ({
+const SearchBox = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: '#f3f4f6',
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
+  backgroundColor: alpha(theme.palette.common.black, 0.05),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.black, 0.1),
   },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
+  marginLeft: theme.spacing(2),
+  width: '100%',
+  maxWidth: 400,
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
-  color: '#6b7280',
+  paddingLeft: theme.spacing(1),
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
+const StyledInput = styled(InputBase)(({ theme }) => ({
+  marginLeft: theme.spacing(1),
+  flex: 1,
 }));
 
 const Header: React.FC = () => {
-  const { user } = useAuth();
+  const { user, login, logout, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    login({ id: '1', name: 'Student', email: 'student@example.com' });
+    navigate('/dashboard');
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   return (
     <StyledAppBar position="fixed">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 0, mr: 3 }}>
-          Welcome {user?.name || 'Student'},
+      <StyledToolbar>
+        {/* Welcome message */}
+        <Typography variant="h6" component="div" sx={{ mr: 3 }}>
+          Welcome {user?.name || 'Guest'},
         </Typography>
-        
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="Search..."
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </Search>
-        
+
+        {/* Search box */}
+        <SearchBox>
+          <Search />
+          <StyledInput placeholder="Search…" />
+        </SearchBox>
+
         <Box sx={{ flexGrow: 1 }} />
-        
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Badge badgeContent={1} color="error">
-            <NotificationsIcon sx={{ color: '#6b7280', cursor: 'pointer' }} />
-          </Badge>
-          
-          <Badge badgeContent={3} color="error">
-            <MailIcon sx={{ color: '#6b7280', cursor: 'pointer' }} />
-          </Badge>
-          
-          <Avatar
-            sx={{ 
-              width: 40, 
-              height: 40, 
-              bgcolor: '#1e3a8a',
-              cursor: 'pointer'
-            }}
+
+        {/* Login / Logout */}
+        {!isAuthenticated ? (
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleLogin}
+            sx={{ mr: 2 }}
           >
-            {user?.name?.charAt(0) || 'S'}
-          </Avatar>
-        </Box>
-      </Toolbar>
+            Login
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            color="primary"
+            onClick={handleLogout}
+            sx={{ mr: 2 }}
+          >
+            Logout
+          </Button>
+        )}
+
+        {/* Icons when logged in */}
+        {isAuthenticated && (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="error">
+                <Mail />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit">
+              <Badge badgeContent={17} color="error">
+                <Notifications />
+              </Badge>
+            </IconButton>
+            <Avatar alt={user?.name || 'Student'} src="/static/images/avatar/1.jpg" />
+          </Box>
+        )}
+      </StyledToolbar>
     </StyledAppBar>
   );
 };

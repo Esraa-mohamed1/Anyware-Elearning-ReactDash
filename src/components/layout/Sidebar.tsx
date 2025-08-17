@@ -102,20 +102,7 @@ const Sidebar: React.FC = () => {
         </List>
         <Box sx={{ mt: 'auto', p: 2, textAlign: 'center' }}>
           {/* Language Switcher Buttons */}
-          <Button
-            variant="contained"
-            onClick={() => changeLanguage('en')}
-            sx={{ textTransform: 'none', mb: 1 }}
-          >
-            English
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => changeLanguage('ar')}
-            sx={{ textTransform: 'none' }}
-          >
-            العربية
-          </Button>
+          
         </Box>
       </Box>
     </StyledDrawer>
